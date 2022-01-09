@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 // import React from 'react'
 import React, { Component } from "react";
@@ -13,6 +14,8 @@ import {
     CInputGroupText,
     CRow, CFormFeedback, CFormSelect
 } from '@coreui/react'
+
+import { withRouter } from 'react-router-dom';
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import AuthService from '../../../services/AuthService';
@@ -58,7 +61,7 @@ class Register extends Component {
         e.preventDefault()
         e.stopPropagation()
         const form = e.currentTarget
-        console.log("===", form)
+
         if (form.checkValidity() === false) {
             e.preventDefault()
             e.stopPropagation()
@@ -70,13 +73,13 @@ class Register extends Component {
                 if (!result) return
 
                 if (result.status === 'success') {
-                    // ToastService.success("Successfully Registered");
+
                     localStorage.setItem('userData', JSON.stringify(result.user));
                     localStorage.setItem('userAuth', JSON.stringify(result.token));
-                    // this.props.history.push({ pathname: '/home' });
+                    this.props.history.push({ pathname: '/' });
                 }
                 else {
-                    // return ToastService.error(result.message);
+                    return alert(result.message);
                 }
             })
             .catch((err) => {
@@ -151,7 +154,7 @@ class Register extends Component {
                                             <CFormFeedback invalid>Please enter valid field.</CFormFeedback>
                                         </CInputGroup>
                                         <CInputGroup className="mb-3">
-                                            <CFormInput placeholder="Password" name="password" type=" password" onChange={this.handleChange} required />
+                                            <CFormInput placeholder="Password" name="password" type="password" onChange={this.handleChange} required />
                                             <CFormFeedback invalid>Please enter valid field.</CFormFeedback>
                                         </CInputGroup>
                                         <CInputGroup className="mb-3">
@@ -248,4 +251,4 @@ class Register extends Component {
     };
 }
 
-export default Register
+export default withRouter(Register);
