@@ -207,7 +207,7 @@ class Register extends Component {
                                         </CInputGroup>
                                         <CInputGroup className="mb-3">
                                             <CInputGroupText>Company license</CInputGroupText>
-                                            <CFormInput name="company_license" placeholder="Upload documents" autoComplete="units" type="file" onChange={this.handleChange} required />
+                                            <CFormInput name="company_license" placeholder="Upload documents" autoComplete="units" type="file" onChange={this.handleChange} accept="image/png, image/jpeg, application/pdf,application/doc ,application/docx" required />
                                             <CFormFeedback invalid>Please enter valid field.</CFormFeedback>
                                         </CInputGroup>
 
