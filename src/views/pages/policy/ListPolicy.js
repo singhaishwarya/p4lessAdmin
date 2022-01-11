@@ -15,7 +15,7 @@ import {
     CTableRow, CInputGroup, CFormSelect, CInputGroupText, CButton
 } from '@coreui/react'
 
-const Tables = () => {
+const ListPolicy = () => {
     return (
         <CRow>
             <CInputGroup className="mb-3">
@@ -141,4 +141,4 @@ const Tables = () => {
     )
 }
 
-export default Tables
+export default ListPolicy

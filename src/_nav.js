@@ -2,7 +2,7 @@
 import React from 'react'
 import CIcon from '@coreui/icons-react'
 import { cilPuzzle, cilSpeedometer, cilStar } from '@coreui/icons'
-import { CNavItem } from '@coreui/react'
+import { CNavItem, CNavGroup } from '@coreui/react'
 
 const _nav = [
     {
@@ -17,16 +17,28 @@ const _nav = [
     },
     {
         component: CNavItem,
-        name: 'Detailed Reports',
+        name: 'reports',
         to: '/reports',
         icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
     },
     {
-        component: CNavItem,
+        component: CNavGroup,
         name: 'Policy',
         to: '/policy',
-        icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    },
+        icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+        items: [
+            {
+                component: CNavItem,
+                name: 'Create Policy',
+                to: '/policy/create-policy',
+            },
+            {
+                component: CNavItem,
+                name: 'List Policy',
+                to: '/policy/list-policy',
+            },
+        ]
+    }
     //   {
     //     component: CNavItem,
     //     name: 'Register',
