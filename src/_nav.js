@@ -39,18 +39,6 @@ const _nav = [
             },
         ]
     }
-    //   {
-    //     component: CNavItem,
-    //     name: 'Register',
-    //     to: '/register',
-    //     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    //   },
-    //   {
-    //     component: CNavItem,
-    //     name: 'Error 404',
-    //     to: '/404',
-    //     icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-    //   },
 ]
 
 export default _nav

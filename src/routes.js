@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react'
 
-const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
-
+const Dashboard = React.lazy(() => import('./views/pages/dashboard/Dashboard'))
 const CreatePolicy = React.lazy(() => import('./views/pages/policy/CreatePolicy'))
 const ListPolicy = React.lazy(() => import('./views/pages/policy/ListPolicy'))
 
