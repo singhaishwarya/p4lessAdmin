@@ -12,7 +12,7 @@ import {
     CFormInput,
     CInputGroup,
     CInputGroupText,
-    CRow,
+    CRow, CFormFeedback
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
@@ -25,46 +25,50 @@ class Login extends Component {
             username: '',
             password: '',
             usernameError: '',
-            passwordError: ''
+            passwordError: '',
+            isValidated: false,
         };
     }
-    handleSubmit = () => {
-        if (this.validate()) {
-            this.setState({ usernameError: '', passwordError: '' });
-            const { username, password } = this.state;
-            AuthService.login({ "password": password, "username": username })
-                .then((result) => {
 
-                    if (!result) return
 
-                    if (result.status === 'success') {
+    handleSubmit = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        const form = e.currentTarget
 
-                        localStorage.setItem('userData', JSON.stringify(result.user));
-                        localStorage.setItem('userAuth', JSON.stringify(result.token));
-
-                        // window.location.reload();
-                        // ToastService.success("Successfully Login");
-                        // this.props.location.state.tabId ? this.props.history.push({
-                        //     pathname: '/buy-protection', state: {
-                        //         tabId: this.props.location.state.tabId
-                        //     }
-                        // }) : this.props.history.push({ pathname: '/home' });
-                    }
-                    else {
-                        return ToastService.error(result.message);
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-            // axiosConfig.post('user/register', { "first_name": f_name, "last_name": l_name, "password": password, "email": email, "username": "" })
-            //     .then(res => {
-            //         console.log(res);
-            //     })
-            //     .catch(err => {
-            //         console.log(err);
-            //     })};
+        if (form.checkValidity() === false) {
+            e.preventDefault()
+            e.stopPropagation()
         }
+        // this.setState({ usernameError: '', passwordError: '' });
+        const { username, password } = this.state;
+        AuthService.login({ "password": password, "username": username, group_name: "agent" })
+            .then((result) => {
+
+                if (!result) return
+
+                if (result.status === 'success') {
+
+                    localStorage.setItem('userData', JSON.stringify(result.user));
+                    localStorage.setItem('userAuth', JSON.stringify(result.token));
+                    // eslint-disable-next-line react/prop-types
+                    this.props.history.push({ pathname: '/' });
+                }
+                else {
+                    return ToastService.error(result.message);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+    }
+
+    validated = (val) => {
+        this.setState({ isValidated: val })
     }
     render() {
         const { username, password, usernameError, passwordError } = this.state;
@@ -76,14 +80,18 @@ class Login extends Component {
                             <CCardGroup>
                                 <CCard className="p-4">
                                     <CCardBody>
-                                        <CForm>
+                                        <CForm onSubmit={this.handleSubmit}
+                                            noValidate
+                                            validated={this.state.isValidated}
+                                        >
                                             <h1>Login</h1>
                                             <p className="text-medium-emphasis">Sign In to your account</p>
                                             <CInputGroup className="mb-3">
                                                 <CInputGroupText>
                                                     <CIcon icon={cilUser} />
                                                 </CInputGroupText>
-                                                <CFormInput placeholder="Username" autoComplete="username" />
+                                                <CFormInput placeholder="Username" autoComplete="username" name="username" onChange={this.handleChange} required />
+                                                <CFormFeedback invalid>Please enter valid username.</CFormFeedback>
                                             </CInputGroup>
                                             <CInputGroup className="mb-4">
                                                 <CInputGroupText>
@@ -93,14 +101,16 @@ class Login extends Component {
                                                     type="password"
                                                     placeholder="Password"
                                                     autoComplete="current-password"
+                                                    name="password"
+                                                    onChange={this.handleChange} required
                                                 />
+                                                <CFormFeedback invalid>Please enter password.</CFormFeedback>
                                             </CInputGroup>
                                             <CRow>
                                                 <CCol xs={6}>
-                                                    <Link to='/'>
-                                                        <CButton color="primary" className="px-4">
-                                                            Login
-                                                        </CButton></Link>
+                                                    <CButton type="submit" color="primary" className="px-4">
+                                                        Login
+                                                    </CButton>
                                                 </CCol>
                                             </CRow>
                                         </CForm>

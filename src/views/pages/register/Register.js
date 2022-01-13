@@ -31,6 +31,7 @@ class Register extends Component {
     componentDidMount() {
         this.getCountries()
     }
+
     getCity = (countryId, stateId) => {
         MasterService.getCity({ country_id: countryId, state_id: stateId }).then((result) => {
 
