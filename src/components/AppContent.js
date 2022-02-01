@@ -20,7 +20,7 @@ const AppContent = () => {
                                     exact={route.exact}
                                     name={route.name}
                                     render={(props) =>
-                                        localStorage.getItem("tokenName") !== null
+                                        localStorage.getItem("userAuth") !== null
                                             ? (
                                                 <route.component {...props} />
                                             ) : (

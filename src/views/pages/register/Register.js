@@ -67,7 +67,6 @@ class Register extends Component {
             e.preventDefault()
             e.stopPropagation()
         }
-        // const { f_name, l_name, email, password } = this.state;
         AuthService.register(this.state)
             .then((result) => {
 
@@ -77,7 +76,7 @@ class Register extends Component {
 
                     localStorage.setItem('userData', JSON.stringify(result.user));
                     localStorage.setItem('userAuth', JSON.stringify(result.token));
-                    this.props.history.push({ pathname: '/' });
+                    this.props.history.push({ pathname: '/login' });
                 }
                 else {
                     return alert(result.message);
@@ -125,6 +124,7 @@ class Register extends Component {
         this.setState({ isValidated: val })
     }
     render() {
+        console.log("===", this.state)
         return (
             <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
                 <CContainer>

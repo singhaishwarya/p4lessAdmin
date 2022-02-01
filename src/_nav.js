@@ -34,6 +34,11 @@ const _nav = [
             },
             {
                 component: CNavItem,
+                name: 'Bulk Upload',
+                to: '/policy/bulk-upload',
+            },
+            {
+                component: CNavItem,
                 name: 'List Policy',
                 to: '/policy/list-policy',
             },

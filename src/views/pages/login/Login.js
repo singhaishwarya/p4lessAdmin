@@ -48,11 +48,10 @@ class Login extends Component {
                 if (!result) return
 
                 if (result.status === 'success') {
-
                     localStorage.setItem('userData', JSON.stringify(result.user));
                     localStorage.setItem('userAuth', JSON.stringify(result.token));
                     // eslint-disable-next-line react/prop-types
-                    this.props.history.push({ pathname: '/' });
+                    this.props.history.push({ pathname: '/dashboard' });
                 }
                 else {
                     return ToastService.error(result.message);
