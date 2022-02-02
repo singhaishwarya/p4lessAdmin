@@ -1,0 +1,230 @@
+#progressbar{padding: 0 2rem;}
+#progressbar li {
+    list-style-type: none;
+    font-size: 15px;
+    width: 33%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    min-height: 100px;
+    text-align: center;
+    padding-top: 2rem;
+}
+img.stepImage {
+    height: 35px;
+    filter: grayscale(1);
+    margin-bottom: 10px;
+}
+#progressbar li.active img.stepImage {
+    filter: none;
+}
+#progressbar li div {
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 10px;
+}
+#progressbar li.active div {
+    color: #e50019;
+}
+#progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 3px;
+    background: #2a2a2a;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    z-index: 0;
+}
+#progressbar li.active:before, #progressbar li.active:after {
+    background: #e50019;
+}
+
+#msform fieldset {
+    background: white;
+    width: 100%;
+    margin: 0;
+    padding: 2rem;
+}
+.form-card {
+    text-align: left;
+}
+.deviceSection {
+    padding: 1rem 0;
+    border-bottom: 1px solid #bababa;
+}
+.deviceSection h5 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+.text-red {
+    color: #e50019;
+}
+.dropdown-wrap {
+    transition: .2s;
+    margin-bottom: 2rem;
+    position: relative;
+}
+.dropdown-wrap select {
+    display: block;
+    width: 100%;
+    padding: 10px 13% 10px 1.5rem;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000;
+    background-color: #fff;
+    transition: .2s;
+    background-clip: padding-box;
+    background: url(assets/images/selectIcon.png) no-repeat ;
+    background-size: 10px 8px;
+    background-position: 86% 16px;
+    
+    border-radius: 24px;
+    max-width: 100%;
+    text-align: left;
+    position: relative;
+    appearance:none;
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	-ms-appearance:none;
+	border:2px solid #000;
+}
+.dropdown-wrap .dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    right: 6%;
+    height: 0;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.4em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+    position: absolute;
+    top: 40%;
+}
+.dropdown-toggle::after {
+    color: #e50019;
+}
+.dropdown-wrap ul.dropdown-menu {
+    border: 1px solid #e50019;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+}
+.dropdown-wrap ul.dropdown-menu {
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    width: 100%;
+    border: 1px solid #e50019;
+    top: 91% !important;
+    max-height: 210px;
+    overflow-y: auto;
+    transform: none !important;
+    border-radius: 20px;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+.dropdown-menu li {
+    padding: 6px 20px;
+}
+.dropdown-menu li {
+    padding-bottom: 10px;
+}
+.dropdown-wrap .dropdown-menu li {
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-block;
+    width: 100%;
+    padding: 0;
+    padding-bottom: 0;
+}
+.dropdown-menu li a {
+    color: #212529;
+    width: 100%;
+    padding: 9px 14px;
+}
+.dropdown-menu>li>a {
+    display: block;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.summaryWrap {
+    padding: 2rem;
+    border: 1px solid #acacac;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+}
+.summaryWrap h4 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+ul.deviceListing {
+    border-bottom: 1px solid #000;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+ul.deviceListing li {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    margin-bottom: 10px;
+}
+.deviceTitle {
+    width: 42%;
+    color: grey;
+    padding-right: 23px;
+    font-size: 14px;
+}
+.deviceDesc {
+    width: 52%;
+    /* color: grey; */
+    /* padding-left: 0px; */
+    font-size: 14px;
+}
+button.buttonDefault {
+    background: #e50019;
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid #e5011a;
+    margin: 1rem auto;
+    padding: 8px 2rem;
+    border-radius: 36px;
+    cursor: pointer;
+    width: auto;
+}
+button.buttonDefault:hover {
+    background: black;
+    border-color: black;
+    transition: all 250ms ease-in-out;
+}
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+.formGrpWrap label {
+    font-weight: 600;
+}
+.form-control {
+    height: 54px;
+    border-color: #d1d1d1;
+    box-shadow: none;
+    border-radius: 28px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    padding: 0 30px;
+}
+.formGrpWrap input {
+    border: 1px solid black;
+    border-radius: 35px;
+    font-size: 12px;
+    padding: 11px 1.5rem;
+}

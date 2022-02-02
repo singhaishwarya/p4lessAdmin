@@ -63,6 +63,7 @@ class BulkUpload extends Component {
                 <CInputGroup className="mb-3">
                     {/* <!-- <CInputGroupText>Company license</CInputGroupText> --> */}
                     <CFormInput name="data_file" placeholder="Upload documents" autoComplete="units" type="file" onChange={this.handleChange} accept=".xlsx,.xls" required />
+                    
                     <div className="d-grid">
                         <CButton type="submit" onClick={this.submitHandler} color="success">Submit</CButton>
                     </div>

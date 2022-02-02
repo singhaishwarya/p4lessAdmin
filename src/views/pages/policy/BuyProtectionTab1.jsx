@@ -157,7 +157,7 @@ export default class BuyProtectionTab1 extends Component {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="dropdown-wrap">
-                                                <select className="btn dropdown-toggle selectDropDown"
+                                                <select className="selectDropDown"
                                                     name="selectedDevice"
                                                     data-toggle="dropdown" value={selectedDevice}
                                                     onChange={this.handleChange.bind(this, "selectedDevice")}
@@ -174,7 +174,7 @@ export default class BuyProtectionTab1 extends Component {
                                         <div className="col-md-6">
                                             <div className="dropdown-wrap">
 
-                                                <select className="btn dropdown-toggle selectDropDown"
+                                                <select className="selectDropDown"
                                                     name="selectedBrand"
                                                     data-toggle="dropdown" value={selectedBrand}
                                                     onChange={this.handleChange.bind(this, "selectedBrand")}
@@ -194,7 +194,7 @@ export default class BuyProtectionTab1 extends Component {
                                         <div className="col-md-6">
                                             <div className="dropdown-wrap">
 
-                                                <select className="btn dropdown-toggle selectDropDown"
+                                                <select className="selectDropDown"
                                                     name="selectedDeviceValue"
                                                     data-toggle="dropdown" value={selectedDeviceValue}
                                                     onChange={this.handleChange.bind(this, "selectedDeviceValue")}>
@@ -208,7 +208,7 @@ export default class BuyProtectionTab1 extends Component {
                                         </div>
                                         <div className="col-md-6">
                                             <div className="dropdown-wrap">
-                                                <select className="btn dropdown-toggle selectDropDown"
+                                                <select className="selectDropDown"
                                                     name="selectedDeviceAge"
                                                     data-toggle="dropdown" value={selectedDeviceAge}
                                                     onChange={this.handleChange.bind(this, "selectedDeviceAge")}>

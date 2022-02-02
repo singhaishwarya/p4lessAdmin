@@ -227,7 +227,7 @@ export default class CreatePolicy extends Component {
                                         <div className="container-fluid">
                                             <div className="row justify-content-center">
                                                 <div className="col-md-10">
-                                                    <div className="card ">
+                                                    <div className="card" id="msform">
                                                         <ul id="progressbar">
                                                             <li className={(tabClass >= 1) ? "active" : ""} id="account" key={"account"} onClick={() => this.setState({ tabClass: 1 })}>
                                                                 <img src={step1} className="stepImage" alt="" />
