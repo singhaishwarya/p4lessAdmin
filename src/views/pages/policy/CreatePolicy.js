@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom'; import {
@@ -15,8 +16,12 @@ import { Link } from 'react-router-dom'; import {
     CTableRow, CInputGroup, CFormSelect, CInputGroupText, CButton
 } from '@coreui/react'
 import MasterService from '../../../services/MasterService';
-// import cardList from '../../../src/assets/images/cardList.png';
-// import ToastService from '../../services/ToastService';
+import step1 from '../../../../src/assets/images/step1.png';
+import step2 from '../../../../src/assets/images/step2.png';
+import step4 from '../../../../src/assets/images/step4.png';
+import BuyProtectionTab1 from "./BuyProtectionTab1";
+import BuyProtectionTab2 from "./BuyProtectionTab2";
+import BuyProtectionTab3 from "./BuyProtectionTab3";
 
 export default class CreatePolicy extends Component {
     constructor(props) {
@@ -152,8 +157,42 @@ export default class CreatePolicy extends Component {
         }
         else {
             localStorage.setItem('tab1Data', JSON.stringify(this.state));
-            // this.props.tabHandleChange({ tabclass: 2, selectedModel: selectedModel, selectedPlan: selectedPlan, promocode: promocode, selectedMonth: selectedMonth, selectedPaymentMethod: selectedPaymentMethod, tabData: this.state });
+            this.props.tabHandleChange({ tabclass: 2, selectedModel: selectedModel, selectedPlan: selectedPlan, promocode: promocode, selectedMonth: selectedMonth, selectedPaymentMethod: selectedPaymentMethod, tabData: this.state });
         }
+    }
+    tabHandleChange = (e) => {
+        const { selectedModel, selectedPlan, promocode, selectedMonth } = this.state;
+
+        if (e.tabclass === 2) this.setState({ tab1Data: e.tabData })
+        if (e.tabclass === 3) this.setState({ tab2Data: e.tabData })
+        if (e.tabclass === 4) this.setState({ tab3Data: e.tabData })
+
+        const token = localStorage.getItem('userAuth') ? JSON.parse(localStorage.getItem('userAuth')) : '';
+        this.setState({
+            tabClass: e.tabclass === 2 ? (token ? 3 : e.tabclass) : e.tabclass,
+            selectedModel: e.selectedModel ? e.selectedModel : selectedModel,
+            selectedPlan: e.selectedPlan ? e.selectedPlan : selectedPlan,
+            promocode: e.promocode ? e.promocode : promocode,
+            selectedMonth: e.selectedMonth ? e.selectedMonth : selectedMonth,
+        });
+        if (e.tabclass === 3 || (token && e.tabclass === 2)) {
+            this.order(e.selectedModel, e.selectedPlan, e.promocode, e.selectedMonth);
+        }
+    }
+    order = (selectedModel, selectedPlan, promocode, selectedMonth) => {
+
+        MasterService.order({
+            model_id: selectedModel,
+            plan_price_id: selectedPlan,
+            promocode: promocode,
+            depriciation_id: selectedMonth,
+            payment_method: "pointspay",
+        }).then((result) => {
+            if (!result && !result.records[0]) return
+            // this.setState({ tabClass: 4})
+        }).catch((err) => {
+            console.log(err);
+        });
     }
     getDiscountPer = (item, plans) => {
 
@@ -164,7 +203,7 @@ export default class CreatePolicy extends Component {
 
     }
     render() {
-        const { devices, selectedDevice, brands, selectedBrand, selectedModel, models, months, selectedMonth, plans, promocode, promoApplied, promoMessage, discountedPrice, selectedPlan, agreeTnC, selectedPaymentMethod } = this.state;
+        const { devices, selectedDevice, brands, selectedBrand, selectedModel, models, months, selectedMonth, plans, promocode, promoApplied, promoMessage, discountedPrice, selectedPlan, agreeTnC, selectedPaymentMethod, tabClass, tab1Data, tab2Data, tab3Data } = this.state;
 
 
         let selectedDeviceName = devices?.find(o => o.id === selectedDevice * 1),
@@ -173,10 +212,53 @@ export default class CreatePolicy extends Component {
             selectedMonthName = months?.find(o => o.id === selectedMonth * 1),
             selectedPlanName = plans?.find(o => o.id === selectedPlan * 1);
 
+
         return (
             <CRow>
                 <CCol xs={12}>
-                    <CCard className="mb-4">
+
+                    <section className="protectionFormWrap" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="300">
+                        <div className="container">
+
+
+                            <div className="row desktop-show">
+                                <div className="col-md-12">
+                                    <div className="protectformCover">
+                                        <div className="container-fluid">
+                                            <div className="row justify-content-center">
+                                                <div className="col-md-10">
+                                                    <div className="card ">
+                                                        <ul id="progressbar">
+                                                            <li className={(tabClass >= 1) ? "active" : ""} id="account" key={"account"} onClick={() => this.setState({ tabClass: 1 })}>
+                                                                <img src={step1} className="stepImage" alt="" />
+                                                                <div>1. select plan</div>
+                                                            </li>
+                                                            <li id="personal" className={(tabClass >= 2) ? "active" : ""} key={"personal"} onClick={() => this.setState({ tabClass: 2 })}>
+                                                                <img src={step2} className="stepImage" alt="" />
+                                                                <div>2. Register</div>
+                                                            </li>
+                                                            <li id="confirm" className={(tabClass >= 3) ? "active" : ""} key={"confirm"} onClick={() => this.setState({ tabClass: 3 })}>
+                                                                <img src={step4} className="stepImage" alt="" />
+                                                                <div>3. Device details</div>
+                                                            </li>
+                                                        </ul>
+                                                        <br />
+                                                        {tabClass === 1 ? <BuyProtectionTab1 tab1Data={tab1Data} tabClass={tabClass} tabHandleChange={this.tabHandleChange} /> : ''}
+                                                        {tabClass === 2 ? <BuyProtectionTab2 tab1Data={tab2Data} tabClass={tabClass} tabHandleChange={this.tabHandleChange} /> : ''}
+                                                        {tabClass === 3 ? <BuyProtectionTab3 tab1Data={tab3Data} tabClass={tabClass} tabHandleChange={this.tabHandleChange} /> : ''}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                    {/* <CCard className="mb-4">
                         <div className="form-card">
                             <div className="row">
                                 <div className="col-md-6">
@@ -271,7 +353,7 @@ export default class CreatePolicy extends Component {
                                 </div>
                             </div>
                         </div>
-                    </CCard>
+                    </CCard> */}
                 </CCol>
             </CRow>
         );
