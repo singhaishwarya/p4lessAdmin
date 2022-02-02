@@ -31,6 +31,7 @@ export default class CreatePolicy extends Component {
         // localStorage.getItem('tab1Data') ? JSON.parse(localStorage.getItem('tab1Data')) : this.props.tab1Data;
 
         this.state = storedData ? storedData : {
+            tabClass: localStorage.getItem('userAuth') ? parseInt(this.props.location?.state?.tabId || localStorage.getItem('tabClass')) || 1 : 1,
             devices: [], selectedDevice: 0, brands: [], selectedBrand: 0, models: [], selectedModel: 0,
             months: [], discountedPrice: 0, selectedMonth: 0, plans: [], selectedPlan: 0, promocode: '', promoApplied: false, promoMessage: '', selectedPaymentMethod: '', agreeTnC: false
         };
