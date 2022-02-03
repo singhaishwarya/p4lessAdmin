@@ -53,33 +53,8 @@ class BuyProtectionTab2 extends Component {
     }
     handleSubmit = () => {
         if (this.validate()) {
-            this.setState({ nameError: '', emailError: '', passwordError: '', newPasswordError: '' });
-            const { f_name, l_name, email, password } = this.state;
-            MasterService.order({ customerDetail: { "first_name": f_name, "last_name": l_name, "password": password, "email": email, "username": email } })
-                .then((result) => {
-                    if (!result) return
 
-                    if (result.status === 'success') {
-                        localStorage.setItem('userData', JSON.stringify(result.user));
-                        localStorage.setItem('userAuth', JSON.stringify(result.token));
-                        // localStorage.setItem('tabClass', 3);
-
-                        this.props.tabHandleChange({ tabclass: 3 });
-                        // this.props.history.push({
-                        //     pathname: '/buy-protection', state: {
-                        //         tabId: 3
-                        //     }
-                        // })
-                        // this.props.tabHandleChange({ tabclass: 3 });
-                        window.location.reload()
-                    }
-                    else {
-                        // return ToastService.error(result.message);
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            this.props.tabHandleChange({ tabclass: 3 });
         }
 
     }

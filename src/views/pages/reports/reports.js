@@ -15,44 +15,11 @@ import {
     CTableRow, CInputGroup, CFormSelect, CInputGroupText, CButton
 } from '@coreui/react'
 
-const ListPolicy = () => {
+const Reports = () => {
     return (
         <CRow>
-            <CInputGroup className="mb-3">
-                <CInputGroupText>Category</CInputGroupText><CFormSelect
-                    aria-label="Default select example"
-                    options={[]}
-                // onChange={this.handleChange} name="company_country" required
-                />
-                <CInputGroupText>Date</CInputGroupText><CFormSelect
-                    aria-label="Default select example"
-                    options={[]}
-                // onChange={this.handleChange} name="company_country" required
-                />
-
-            </CInputGroup>
-            <CInputGroup className="mb-3">
-                <CInputGroupText>Plan</CInputGroupText><CFormSelect
-                    aria-label="Default select example"
-                    options={[]}
-                // onChange={this.handleChange} name="company_country" required
-                />
-                <div className="d-grid">
-                    <CButton type="submit" color="success">Reset</CButton>
-                </div>
-                <div className="d-grid">
-                    <CButton type="submit" color="success">Submit</CButton>
-                </div>
-                <div className="d-grid">
-                    <CButton type="submit" color="success">Download</CButton>
-                </div>
-
-            </CInputGroup>
             <CCol xs={12}>
                 <CCard className="mb-4">
-                    <CCardHeader>
-                        {/* <strong>React Table</strong> <small>Striped rows</small> */}
-                    </CCardHeader>
                     <CCardBody>
                         <CTable striped>
                             <CTableHead>
@@ -141,4 +108,4 @@ const ListPolicy = () => {
     )
 }
 
-export default ListPolicy
+export default Reports

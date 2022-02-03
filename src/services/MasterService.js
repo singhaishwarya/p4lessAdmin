@@ -111,7 +111,7 @@ export default class MasterService extends Component {
     }
     static order = async (data) => {
         try {
-            const response = await axios.post(baseUrl + 'orders/create', data, config)
+            const response = await axios.post(baseUrl + 'orders/create-bypartner', data, config)
             return response.data ? response.data : []
         } catch (error) {
             const { response } = error

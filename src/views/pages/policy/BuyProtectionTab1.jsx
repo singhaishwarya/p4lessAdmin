@@ -14,7 +14,7 @@ export default class BuyProtectionTab1 extends Component {
 
         this.state = storedData ? storedData : {
             devices: [], selectedDevice: 0, brands: [], selectedBrand: 0, deviceValues: [], selectedDeviceValue: 0,
-            deviceAge: [], discountedPrice: 0, selectedDeviceAge: 0, plans: [], selectedPlan: 0, promocode: '', promoApplied: false, promoMessage: '', selectedPaymentMethod: '', agreeTnC: false
+            deviceAge: [], discountedPrice: 0, selectedDeviceAge: 0, plans: [], selectedPlan: 0, promocode: '', selectedPaymentMethod: '', agreeTnC: false
         };
     }
     componentDidMount() {
@@ -30,7 +30,7 @@ export default class BuyProtectionTab1 extends Component {
             "device_id": deviceId,
             "slab_id": slabId,
         }).then((result) => {
-            if (!result && !result.records[0]) return
+            if (!result && !result.records[0]) alert("No plans exist")
             this.setState({ plans: result.records });
             let selectedPlanName = result.records.find(o => o.no_of_month === 12);
             this.setState({ selectedPlan: selectedPlanName.id });
@@ -81,7 +81,6 @@ export default class BuyProtectionTab1 extends Component {
         });
     }
     handleChange(field, e) {
-        console.log("===", field)
         if (field === 'agreeTnC') {
             this.setState({ [field]: e.target.checked });
 
@@ -117,8 +116,12 @@ export default class BuyProtectionTab1 extends Component {
             // return ToastService.error("Please fill mandatory detail");
         }
         else {
+            console.log("demo===", this.state)
             localStorage.setItem('tab1Data', JSON.stringify(this.state));
-            this.props.tabHandleChange({ tabclass: 2, selectedDeviceValue: selectedDeviceValue, selectedPlan: selectedPlan, promocode: promocode, selectedDeviceAge: selectedDeviceAge, selectedPaymentMethod: selectedPaymentMethod, tabData: this.state });
+            this.props.tabHandleChange({
+                tabclass: 2,
+                selectedDeviceValue: selectedDeviceValue, selectedPlan: selectedPlan, promocode: promocode, selectedDeviceAge: selectedDeviceAge, selectedPaymentMethod: selectedPaymentMethod, tabData: this.state
+            });
         }
     }
     getDiscountPer = (item, plans) => {
@@ -253,7 +256,7 @@ export default class BuyProtectionTab1 extends Component {
                                             </div>)}
                                 </div>
                             </div>
-                            <div className="deviceSection">
+                            {/* <div className="deviceSection">
                                 <h5>
                                     <span className="text-red">
                                         C.
@@ -293,8 +296,8 @@ export default class BuyProtectionTab1 extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                {/* <img src={cardList} className="formCard" alt="" /> */}
-                            </div>
+                                {/* <img src={cardList} className="formCard" alt="" /> 
+                            </div> */}
                             <br />
 
                         </div>

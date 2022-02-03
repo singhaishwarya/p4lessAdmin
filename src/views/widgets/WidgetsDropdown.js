@@ -29,7 +29,7 @@ const WidgetsDropdown = () => {
                             </span>
                         </>
                     }
-                    title="Plans Sold"
+                    title="Policies Sold"
                     action={
                         <CDropdown alignment="end">
                             <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -116,7 +116,7 @@ const WidgetsDropdown = () => {
                             </span>
                         </>
                     }
-                    title="Total Revenue"
+                    title="Total Policies"
                     action={
                         <CDropdown alignment="end">
                             <CDropdownToggle color="transparent" caret={false} className="p-0">
@@ -275,7 +275,7 @@ const WidgetsDropdown = () => {
                             </span>
                         </>
                     }
-                    title="Active Users"
+                    title="Active Customers"
                     action={
                         <CDropdown alignment="end">
                             <CDropdownToggle color="transparent" caret={false} className="p-0">
