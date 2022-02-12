@@ -26,7 +26,7 @@ const AppSidebar = () => {
             }}
         >
             <CSidebarBrand className="d-none d-md-flex" to="/">
-                {JSON.parse(localStorage.getItem('userData')).first_name}  {JSON.parse(localStorage.getItem('userData')).last_name}
+                {JSON.parse(localStorage.getItem('userData'))?.first_name}  {JSON.parse(localStorage.getItem('userData'))?.last_name}
             </CSidebarBrand>
             <CSidebarNav>
                 <SimpleBar>

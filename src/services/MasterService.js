@@ -230,5 +230,17 @@ export default class MasterService extends Component {
             // console.log(`FETCH GET ERROR`, response);
         }
     }
+    static orderList = async (data) => {
+        try {
+            const response = await axios.post(baseUrl + 'orders/list', data, config)
+            return response.data ? response.data : []
+        } catch (error) {
+            const { response } = error
+            if (!response) return
+            return response.data ? response.data : []
+            // console.log(`FETCH GET ERROR`, response);
+        }
+    }
+
 
 }

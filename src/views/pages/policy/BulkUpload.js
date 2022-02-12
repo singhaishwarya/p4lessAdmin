@@ -13,12 +13,18 @@ import {
     CTableDataCell,
     CTableHead,
     CTableHeaderCell,
-    CTableRow, CInputGroup, CFormSelect, CInputGroupText, CButton, CFormInput
+    CTableRow, CInputGroup, CPagination, CPaginationItem, CButton, CFormInput
 } from '@coreui/react'
 import BulkUploadService from '../../../services/BulkUploadService';
 
 class BulkUpload extends Component {
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            bulkData: [],
+        };
+    }
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.files[0] })
@@ -36,13 +42,7 @@ class BulkUpload extends Component {
                 if (!result) return
 
                 if (result.status === 'success') {
-
-                    // localStorage.setItem('userData', JSON.stringify(result.user));
-                    // localStorage.setItem('userAuth', JSON.stringify(result.token));
-                    // this.props.history.push({ pathname: '/login' });
-                }
-                else {
-                    // return alert(result.message);
+                    this.setState({ bulkData: result.all_order_data })
                 }
             })
             .catch((err) => {
@@ -63,7 +63,7 @@ class BulkUpload extends Component {
                 <CInputGroup className="mb-3">
                     {/* <!-- <CInputGroupText>Company license</CInputGroupText> --> */}
                     <CFormInput name="data_file" placeholder="Upload documents" autoComplete="units" type="file" onChange={this.handleChange} accept=".xlsx,.xls" required />
-                    
+
                     <div className="d-grid">
                         <CButton type="submit" onClick={this.submitHandler} color="success">Submit</CButton>
                     </div>
@@ -94,67 +94,31 @@ class BulkUpload extends Component {
                                     </CTableRow>
                                 </CTableHead>
                                 <CTableBody>
-                                    <CTableRow>
-                                        <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                    </CTableRow>
-                                    <CTableRow>
-                                        <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                    </CTableRow><CTableRow>
-                                        <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                    </CTableRow><CTableRow>
-                                        <CTableHeaderCell scope="row">1</CTableHeaderCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                        <CTableDataCell>Mark</CTableDataCell>
-                                        <CTableDataCell>Otto</CTableDataCell>
-                                        <CTableDataCell>@mdo</CTableDataCell>
-                                    </CTableRow>
+                                    {this.state.bulkData?.map((item, index) =>
+                                        <CTableRow key={index}>
+                                            <CTableHeaderCell scope="row">{index + 1}</CTableHeaderCell>
+                                            <CTableDataCell>{item.country_code}</CTableDataCell>
+                                            <CTableDataCell>{item.date_added}</CTableDataCell>
+                                            <CTableDataCell>{item.device_name}</CTableDataCell>
+                                            <CTableDataCell>{item.brand_name}</CTableDataCell>
+                                            <CTableDataCell>{item.model_name}</CTableDataCell>
+                                            <CTableDataCell>{item.plan_name}</CTableDataCell>
+                                            <CTableDataCell>{item.total_amount}</CTableDataCell>
+                                            <CTableDataCell>{item.promocode}</CTableDataCell>
+                                            <CTableDataCell>-</CTableDataCell>
+                                            <CTableDataCell>-</CTableDataCell>
+                                            <CTableDataCell>-</CTableDataCell>
+                                            <CTableDataCell>-</CTableDataCell>
+                                        </CTableRow>)}
                                 </CTableBody>
-                                <CTableCaption>Pagination</CTableCaption>
                             </CTable>
+                            <CPagination align="center" aria-label="Page navigation example">
+                                <CPaginationItem disabled>Previous</CPaginationItem>
+                                <CPaginationItem>1</CPaginationItem>
+                                <CPaginationItem>2</CPaginationItem>
+                                <CPaginationItem>3</CPaginationItem>
+                                <CPaginationItem>Next</CPaginationItem>
+                            </CPagination>
                         </CCardBody>
                     </CCard>
                 </CCol>

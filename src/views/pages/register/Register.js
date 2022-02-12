@@ -39,7 +39,7 @@ class Register extends Component {
             this.setState({
                 cities: result?.records?.map(({ id: value, name: label }) => ({ label, value }))
             })
-
+            this.state.cities.splice(0, 0, 'Select cities')
         })
             .catch((err) => {
                 console.log(err);
@@ -52,7 +52,7 @@ class Register extends Component {
             this.setState({
                 states: result?.records?.map(({ id: value, name: label }) => ({ label, value }))
             })
-
+            this.state.states.splice(0, 0, 'Select states')
         })
             .catch((err) => {
                 console.log(err);
@@ -95,7 +95,7 @@ class Register extends Component {
             this.setState({
                 countries: result?.records?.map(({ id: value, name: label }) => ({ label, value }))
             })
-
+            this.state.countries.splice(0, 0, 'Select Country')
         })
             .catch((err) => {
                 console.log(err);
